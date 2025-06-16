@@ -276,24 +276,28 @@
                         Ready to turn your ideas into reality? I'm here to help.
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <Link 
-                            :href="route('projects')"
-                            class="btn-secondary text-white border-white hover:bg-white hover:text-indigo-600 group"
+                        <component 
+                            :is="isStatic ? 'a' : Link"
+                            :href="isStatic ? route('projects') : route('projects')"
+                            class="inline-flex items-center justify-center bg-transparent text-white px-6 py-3 rounded-lg font-medium border-2 border-white hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+                            style="min-height: 48px;"
                         >
                             <span>View My Work</span>
                             <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </Link>
-                        <Link 
-                            :href="route('about')"
-                            class="btn-secondary text-white border-white hover:bg-white hover:text-indigo-600 group"
+                        </component>
+                        <component 
+                            :is="isStatic ? 'a' : Link"
+                            :href="isStatic ? route('about') : route('about')"
+                            class="inline-flex items-center justify-center bg-transparent text-white px-6 py-3 rounded-lg font-medium border-2 border-white hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+                            style="min-height: 48px;"
                         >
                             <span>Learn More About Me</span>
                             <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                        </Link>
+                        </component>
                     </div>
                 </div>
             </div>
@@ -310,6 +314,9 @@ import { route } from 'ziggy-js'
 defineProps({
     personalInfo: Object,
 })
+
+// Static mode detection
+const isStatic = ref(false)
 
 // Form state
 const form = reactive({
@@ -388,6 +395,9 @@ const submitForm = async () => {
 
 // Intersection Observer for scroll animations
 onMounted(() => {
+    // Detect static mode
+    isStatic.value = !document.querySelector('[data-page]')
+    
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'

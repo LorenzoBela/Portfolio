@@ -316,24 +316,27 @@
                         I'm always excited to discuss new opportunities and innovative projects.
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <Link 
-                            :href="route('contact')"
+                        <component 
+                            :is="isStatic ? 'a' : Link"
+                            :href="isStatic ? route('contact') : route('contact')"
                             class="btn-primary group"
                         >
                             <span>Get In Touch</span>
                             <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                             </svg>
-                        </Link>
-                        <Link 
-                            :href="route('projects')"
-                            class="btn-secondary text-white border-white hover:bg-white hover:text-indigo-600 group"
+                        </component>
+                        <component 
+                            :is="isStatic ? 'a' : Link"
+                            :href="isStatic ? route('projects') : route('projects')"
+                            class="inline-flex items-center justify-center bg-transparent text-white px-6 py-3 rounded-lg font-medium border-2 border-white hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+                            style="min-height: 48px;"
                         >
                             <span>View My Work</span>
                             <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </Link>
+                        </component>
                     </div>
                 </div>
             </div>
@@ -344,7 +347,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3'
 import Layout from '@/Components/Layout.vue'
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { route } from 'ziggy-js'
 
 const props = defineProps({
@@ -352,6 +355,9 @@ const props = defineProps({
     education: Array,
     skills: Object,
 })
+
+// Static mode detection
+const isStatic = ref(false)
 
 // Computed properties for stats
 const graduationYear = computed(() => {
@@ -375,6 +381,9 @@ const totalSkills = computed(() => {
 
 // Intersection Observer for scroll animations
 onMounted(() => {
+    // Detect static mode
+    isStatic.value = !document.querySelector('[data-page]')
+    
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
