@@ -53,12 +53,12 @@
                                         Contact Information
                                     </h3>
                                     <div class="space-y-3">
-                                        <div class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition-colors duration-200">
-                                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <div class="flex items-start p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition-colors duration-200">
+                                            <svg class="w-5 h-5 text-gray-400 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                                                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                                             </svg>
-                                            <span class="text-gray-700">{{ personalInfo.email }}</span>
+                                            <span class="text-gray-700 break-all text-sm leading-relaxed">{{ personalInfo.email }}</span>
                                         </div>
                                         <div class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition-colors duration-200">
                                             <svg class="w-5 h-5 text-gray-400 mr-3" fill="currentColor" viewBox="0 0 20 20">

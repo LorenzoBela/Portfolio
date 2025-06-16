@@ -7,6 +7,14 @@ export default {
         './resources/js/**/*.vue',
         './resources/js/**/*.js',
     ],
+    safelist: [
+        'break-all',
+        'flex-shrink-0',
+        'items-start',
+        'text-sm',
+        'leading-relaxed',
+        'mt-0.5'
+    ],
     theme: {
         extend: {
             fontFamily: {
