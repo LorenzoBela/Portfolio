@@ -18,6 +18,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="route('home')" 
+                            :target="isStatic ? '_self' : undefined"
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                                 isCurrentRoute('home') 
@@ -30,6 +31,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="route('about')" 
+                            :target="isStatic ? '_self' : undefined"
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                                 isCurrentRoute('about') 
@@ -42,6 +44,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="route('projects')" 
+                            :target="isStatic ? '_self' : undefined"
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                                 isCurrentRoute('projects') 
@@ -54,6 +57,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="route('contact')" 
+                            :target="isStatic ? '_self' : undefined"
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                                 isCurrentRoute('contact') 
@@ -85,6 +89,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="route('home')" 
+                            :target="isStatic ? '_self' : undefined"
                             @click="mobileMenuOpen = false"
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
@@ -98,6 +103,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="route('about')" 
+                            :target="isStatic ? '_self' : undefined"
                             @click="mobileMenuOpen = false"
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
@@ -111,6 +117,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="route('projects')" 
+                            :target="isStatic ? '_self' : undefined"
                             @click="mobileMenuOpen = false"
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
@@ -124,6 +131,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="route('contact')" 
+                            :target="isStatic ? '_self' : undefined"
                             @click="mobileMenuOpen = false"
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',

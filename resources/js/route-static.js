@@ -1,12 +1,12 @@
 // Static route helper that mimics ziggy-js exports
 export function route(name) {
-    // For static mode, use regular navigation instead of .html files
-    // This will work better with regular anchor tags
+    // For static mode, use paths that work with Vercel static deployment
+    // Use relative paths without .html extension for clean URLs
     const routes = {
-        'home': '/index.html',
-        'about': '/about.html',
-        'projects': '/projects.html', 
-        'contact': '/contact.html'
+        'home': '/',
+        'about': '/about',
+        'projects': '/projects', 
+        'contact': '/contact'
     };
     return routes[name] || '/';
 }

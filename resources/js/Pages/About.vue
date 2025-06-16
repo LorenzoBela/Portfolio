@@ -319,6 +319,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="isStatic ? route('contact') : route('contact')"
+                            :target="isStatic ? '_self' : undefined"
                             class="btn-primary group"
                         >
                             <span>Get In Touch</span>
@@ -329,6 +330,7 @@
                         <component 
                             :is="isStatic ? 'a' : Link"
                             :href="isStatic ? route('projects') : route('projects')"
+                            :target="isStatic ? '_self' : undefined"
                             class="inline-flex items-center justify-center bg-transparent text-white px-6 py-3 rounded-lg font-medium border-2 border-white hover:bg-white hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
                             style="min-height: 48px;"
                         >
