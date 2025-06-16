@@ -281,8 +281,10 @@ const isStatic = ref(false)
 
 // Check if we're in static mode
 onMounted(() => {
-    const appEl = document.getElementById('app')
-    isStatic.value = appEl && appEl.hasAttribute('data-page')
+    // Detect static mode - check if we're running on Vercel or static deployment
+    // Static mode: deployed on Vercel/static hosting
+    // Dynamic mode: localhost development server
+    isStatic.value = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
 })
 
 defineProps({

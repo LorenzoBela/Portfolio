@@ -383,8 +383,14 @@ const totalSkills = computed(() => {
 
 // Intersection Observer for scroll animations
 onMounted(() => {
-    // Detect static mode
-    isStatic.value = !document.querySelector('[data-page]')
+    // Detect static mode - check if we're running on Vercel or static deployment
+    // Static mode: deployed on Vercel/static hosting
+    // Dynamic mode: localhost development server
+    isStatic.value = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
+    console.log('About.vue - Static mode detection:', {
+        hostname: window.location.hostname,
+        isStatic: isStatic.value
+    })
     
     const observerOptions = {
         threshold: 0.1,
