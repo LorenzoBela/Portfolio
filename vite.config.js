@@ -20,6 +20,10 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': '/resources/js',
+            // Replace ziggy-js with static route helper in production builds
+            ...(process.env.NODE_ENV === 'production' ? {
+                'ziggy-js': '/resources/js/route-static.js'
+            } : {})
         },
     },
 });

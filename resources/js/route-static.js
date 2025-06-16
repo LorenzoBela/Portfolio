@@ -1,17 +1,20 @@
-// Simple route helper for static mode
+// Static route helper that mimics ziggy-js exports
 export function route(name) {
-    // Handle if running in browser vs build environment
-    if (typeof window !== 'undefined') {
-        const routes = {
-            'home': '/',
-            'about': '/about.html',
-            'projects': '/projects.html', 
-            'contact': '/contact.html'
-        };
-        return routes[name] || '/';
-    }
-    return '/';
+    const routes = {
+        'home': '/',
+        'about': '/about.html',
+        'projects': '/projects.html', 
+        'contact': '/contact.html'
+    };
+    return routes[name] || '/';
 }
+
+// Export ZiggyVue as empty function for compatibility
+export const ZiggyVue = {
+    install() {
+        // No-op for static mode
+    }
+};
 
 // Also export as default for different import patterns
 export default route; 

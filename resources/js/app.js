@@ -16,20 +16,14 @@ if (isStatic) {
     // Static mode - get data from HTML attribute  
     const pageData = JSON.parse(el.getAttribute('data-page').replace(/&quot;/g, '"'));
     
-    // Import static route helper for static mode
-    import('./route-static.js').then(({ route: staticRoute }) => {
-        // Mock ziggy-js for static mode
-        window.route = staticRoute;
-        
-        resolvePageComponent(`./Pages/${pageData.component}.vue`, import.meta.glob('./Pages/**/*.vue'))
-            .then(page => {
-                const app = createApp({
-                    render: () => h(page.default, pageData.props)
-                });
-                
-                app.mount(el);
+    resolvePageComponent(`./Pages/${pageData.component}.vue`, import.meta.glob('./Pages/**/*.vue'))
+        .then(page => {
+            const app = createApp({
+                render: () => h(page.default, pageData.props)
             });
-    });
+            
+            app.mount(el);
+        });
 } else {
     // Laravel/Inertia mode (local development)
     createInertiaApp({
