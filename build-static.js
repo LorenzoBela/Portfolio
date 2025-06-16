@@ -1,68 +1,157 @@
 import fs from 'fs';
 import path from 'path';
 
-// Portfolio data (same as in your Laravel controller)
+// Portfolio data (matching Laravel controller structure)
 const portfolioData = {
   personalInfo: {
-    name: "Lorenzo Miguel D. Bela",
-    title: "Computer Engineering Student",
-    email: "lorenzo.miguel.bela429@gmail.com",
-    phone: "+639656560409",
-    location: "Quezon City, Philippines",
-    description: "Currently seeking internship opportunities to apply my technical skills and gain practical experience in the field of Computer Engineering."
+    name: 'Lorenzo Miguel D. Bela',
+    title: 'Computer Engineering Student',
+    email: 'lorenzo.miguel.bela429@gmail.com',
+    phone: '+639656560409',
+    location: '149-B Ilocos Sur, 1105, Quezon City',
+    objective: 'Computer Engineering student seeking internship opportunities to apply technical skills in software development, hardware integration and system design while gaining valuable industry experience. Eager to contribute to innovative projects and learn from experienced professionals in a collaborative environment.',
+    linkedin: null,
+    github: null,
+    portfolio: null,
   },
   
   skills: {
-    programming: ["HTML", "CSS", "JavaScript", "PHP", "C", "C++", "Python", "SQL"],
-    tools: ["Arduino", "MySQL", "Git", "VS Code", "Vivado"],
-    languages: ["Filipino (Native)", "English (Fluent)"]
+    languages: [
+      'HTML', 'CSS', 'JavaScript', 'PHP', 'C', 'C++', 'Python', 'SQL', 'Laravel', 'Vue.js', 'Tailwind CSS', 'Bootstrap'
+    ],
+    tools_frameworks: [
+      'Arduino', 'MySQL', 'Git', 'Visual Studio Code', 'Vivado', 'Inertia.js', 'Vite', 'Node.js', 'Composer'
+    ],
+    technologies: [
+      'Web Development', 'PCB Design', 'Circuit Prototyping', 'Database Management', 'Full-Stack Development', 'SPA Development'
+    ],
+    soft_skills: [
+      'Collaboration', 'Problem-Solving', 'Time Management', 'Attention to Detail', 'Project Management', 'Technical Documentation'
+    ]
   },
   
   education: [
     {
-      institution: "Adamson University",
-      degree: "Bachelor of Science in Computer Engineering",
-      period: "2022 - 2026",
-      status: "Current"
+      institution: 'Adamson University',
+      degree: 'Bachelor of Science in Computer Engineering',
+      period: '2022-2026',
+      status: 'Current',
+      coursework: [
+        'Web Design and Development',
+        'Software Design',
+        'Computer Network and Security',
+        'Microprocessor Systems',
+        'Data Structures and Algorithms',
+        'Object-Oriented Programming',
+        'Logic Circuit and Design',
+        'Data and Digital Communications',
+        'Feedback and Control Systems',
+        'Database Design and Development'
+      ]
     },
     {
-      institution: "STI College Global City",
-      degree: "Science, Technology, Engineering and Mathematics (STEM)",
-      period: "2020 - 2022",
-      status: "Graduated with High Honors"
+      institution: 'Adamson University',
+      degree: 'STEM major in Technology',
+      period: '2020-2022',
+      status: 'Completed',
+      honors: 'High Honors'
     }
   ],
   
   projects: [
     {
-      title: "Hash Frames Camera Rental System",
-      description: "A comprehensive web application for camera equipment rental management, featuring user authentication, inventory tracking, and booking system.",
-      technologies: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
-      category: "Web Development"
+      title: 'Modern Portfolio Website',
+      subtitle: 'Personal Portfolio with Modern UI/UX',
+      date: 'June 2025',
+      type: 'Full-Stack Development',
+      description: 'Built a modern, responsive portfolio website using Laravel 12, Vue.js 3, and Tailwind CSS with Apple-style animations and smooth scrolling effects.',
+      features: [
+        'Modern SPA architecture with Inertia.js',
+        'Responsive design with Tailwind CSS',
+        'Apple-style animations and smooth scrolling',
+        'Interactive contact form with validation',
+        'Project showcase with filtering capabilities'
+      ],
+      technologies: ['Laravel', 'Vue.js', 'Tailwind CSS', 'Inertia.js', 'Vite', 'JavaScript', 'PHP'],
+      github: null,
+      demo: null,
+      status: 'Completed'
     },
     {
-      title: "CpE Alumni Tracer Database",
-      description: "Database management system to track and maintain records of Computer Engineering alumni, facilitating networking and career development.",
-      technologies: ["SQL", "Database Design", "PHP"],
-      category: "Database Management"
+      title: 'Hash Frames Camera Rental System',
+      subtitle: 'Web-Based Full Stack System (PHP, MySQL, HTML)',
+      date: 'May 2025',
+      type: 'Web Development',
+      description: 'Developed a reservation and inventory system with user authentication and role-based access for a camera rental business.',
+      features: [
+        'User authentication and role-based access control',
+        'Integrated image upload and payment methods',
+        'Reporting features, system settings, and chatbot support'
+      ],
+      technologies: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+      github: null,
+      demo: 'hashframes.store',
+      status: 'Completed'
     },
     {
-      title: "Hotel Guest Book",
-      description: "Digital guest registration and management system for hotels, streamlining check-in/check-out processes and guest information management.",
-      technologies: ["PHP", "MySQL", "Web Development"],
-      category: "Hospitality Management"
+      title: 'CpE Alumni Tracer Database System',
+      subtitle: 'Database System',
+      date: 'December 2024',
+      type: 'Database Development',
+      description: 'Developed a Database-driven digital guestbook using PHP and MySQL that captures detailed alumni visit logs, feedback, and graduate profiles.',
+      features: [
+        'Automated report generation for alumni tracking',
+        'Improved alumni engagement and record-keeping efficiency'
+      ],
+      technologies: ['PHP', 'MySQL', 'Database Design'],
+      github: null,
+      demo: null,
+      status: 'Completed'
     },
     {
-      title: "Anti-Burglary Arduino System",
-      description: "IoT security system using Arduino microcontroller with sensors to detect unauthorized entry and trigger alerts.",
-      technologies: ["Arduino", "C++", "IoT", "Hardware Programming"],
-      category: "IoT & Security"
+      title: 'Computerized Hotel Guest Book',
+      subtitle: '',
+      date: 'May 2024',
+      type: 'Web Development',
+      description: 'Developed a Web-based guest management system using PHP and MySQL for managing hotel check-ins, visitor information, and room assignments.',
+      features: [
+        'Streamlined hotel front-desk operations',
+        'Facilitated efficient data retrieval and guest management'
+      ],
+      technologies: ['PHP', 'MySQL', 'Web Development'],
+      github: null,
+      demo: null,
+      status: 'Completed'
     },
     {
-      title: "Multi-Sensor Automation System",
-      description: "Automated system integrating multiple sensors for environmental monitoring and control, demonstrating embedded systems expertise.",
-      technologies: ["Arduino", "C++", "Sensor Integration", "Automation"],
-      category: "Embedded Systems"
+      title: 'Anti-Burglary System (Arduino) Security and Automation Project',
+      subtitle: '',
+      date: 'May 2024',
+      type: 'Hardware/Software Integration',
+      description: 'Developed an Arduino microcontroller-based security system featuring ultrasonic proximity detection, buzzer alarms upon intrusion.',
+      features: [
+        'Motion detection with ultrasonic sensors',
+        'Triggered alarms and buzzer alerts',
+        'Designed custom PCB and fabricated an enclosure for practical project integrating hardware, sensors, and real-time alerts'
+      ],
+      technologies: ['Arduino', 'Sensors', 'PCB Design', 'Circuit Prototyping'],
+      github: null,
+      demo: null,
+      status: 'Completed'
+    },
+    {
+      title: 'Multi-Sensor Automation System (Arduino)',
+      subtitle: '',
+      date: 'December 2024',
+      type: 'Hardware Development',
+      description: 'Led team of 5 students through complete development cycle from breadboard prototype to custom PCB fabrication, integrating motion detection, water level monitoring, and proximity sensing systems.',
+      features: [
+        'Achieved detection ranges and response times using Arduino Uno R3, PIR sensors, ultrasonic sensors, and 741 op-amp for automated security and environmental monitoring applications'
+      ],
+      technologies: ['Arduino Uno R3', 'PIR sensors', 'Ultrasonic sensors', 'PCB Design'],
+      github: null,
+      demo: null,
+      status: 'Completed'
     }
   ]
 };
@@ -161,7 +250,8 @@ const pages = [
     props: { 
       personalInfo: portfolioData.personalInfo, 
       skills: portfolioData.skills, 
-      featuredProjects: portfolioData.projects.slice(0, 3) 
+      education: portfolioData.education,
+      projects: portfolioData.projects
     } 
   },
   { 
@@ -170,7 +260,8 @@ const pages = [
     component: 'About', 
     props: { 
       personalInfo: portfolioData.personalInfo, 
-      education: portfolioData.education 
+      education: portfolioData.education,
+      skills: portfolioData.skills
     } 
   },
   { 
