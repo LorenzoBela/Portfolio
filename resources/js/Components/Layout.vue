@@ -178,11 +178,23 @@
 <script setup>
 import { ref } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
+import { route } from 'ziggy-js'
 
 const page = usePage()
 const mobileMenuOpen = ref(false)
 
 const isCurrentRoute = (routeName) => {
-    return page.url === route(routeName)
+    // Get the current page component name
+    const currentPage = page.component
+    
+    // Map route names to page components
+    const routeComponentMap = {
+        'home': 'Home',
+        'about': 'About', 
+        'projects': 'Projects',
+        'contact': 'Contact'
+    }
+    
+    return currentPage === routeComponentMap[routeName]
 }
 </script> 

@@ -210,6 +210,7 @@
 import { Head, Link } from '@inertiajs/vue3'
 import Layout from '@/Components/Layout.vue'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { route } from 'ziggy-js'
 
 const props = defineProps({
     projects: Array,

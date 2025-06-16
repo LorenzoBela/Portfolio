@@ -345,6 +345,7 @@
 import { Head, Link } from '@inertiajs/vue3'
 import Layout from '@/Components/Layout.vue'
 import { computed, onMounted, onUnmounted } from 'vue'
+import { route } from 'ziggy-js'
 
 const props = defineProps({
     personalInfo: Object,
