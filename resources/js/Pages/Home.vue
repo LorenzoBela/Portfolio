@@ -37,7 +37,8 @@
                         </p>
                         
                         <div class="flex flex-col sm:flex-row justify-center gap-4 slide-up-delay-3">
-                            <Link 
+                            <component 
+                                :is="isStatic ? 'a' : Link"
                                 :href="route('projects')"
                                 class="btn-primary transform hover:scale-105 hover:shadow-xl transition-all duration-300"
                             >
@@ -45,8 +46,9 @@
                                 <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                                 </svg>
-                            </Link>
-                            <Link 
+                            </component>
+                            <component 
+                                :is="isStatic ? 'a' : Link"
                                 :href="route('contact')"
                                 class="btn-secondary transform hover:scale-105 hover:shadow-xl transition-all duration-300"
                             >
@@ -54,7 +56,7 @@
                                 <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                                 </svg>
-                            </Link>
+                            </component>
                         </div>
                     </div>
                 </div>
@@ -224,7 +226,8 @@
                 </div>
 
                 <div class="text-center mt-12 scroll-fade-in">
-                    <Link 
+                    <component 
+                        :is="isStatic ? 'a' : Link"
                         :href="route('projects')"
                         class="btn-primary transform hover:scale-105 hover:shadow-xl transition-all duration-300 group"
                     >
@@ -232,7 +235,7 @@
                         <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                         </svg>
-                    </Link>
+                    </component>
                 </div>
             </div>
         </section>
@@ -252,7 +255,8 @@
                     <p class="text-xl text-blue-100 mb-8">
                         I'm always interested in new opportunities and exciting projects.
                     </p>
-                    <Link 
+                    <component 
+                        :is="isStatic ? 'a' : Link"
                         :href="route('contact')"
                         class="inline-flex items-center px-8 py-4 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group"
                     >
@@ -260,7 +264,7 @@
                         <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                         </svg>
-                    </Link>
+                    </component>
                 </div>
             </div>
         </section>
@@ -270,8 +274,16 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3'
 import Layout from '@/Components/Layout.vue'
-import { onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { route } from 'ziggy-js'
+
+const isStatic = ref(false)
+
+// Check if we're in static mode
+onMounted(() => {
+    const appEl = document.getElementById('app')
+    isStatic.value = appEl && appEl.hasAttribute('data-page')
+})
 
 defineProps({
     personalInfo: Object,

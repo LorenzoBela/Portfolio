@@ -5,16 +5,18 @@
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
                     <!-- Logo/Name -->
-                    <Link 
+                    <component 
+                        :is="isStatic ? 'a' : Link"
                         :href="route('home')" 
                         class="text-xl font-bold text-gradient hover:opacity-80 transition-opacity"
                     >
                         Lorenzo Miguel D. Bela
-                    </Link>
+                    </component>
 
                     <!-- Desktop Navigation -->
                     <div class="hidden md:flex space-x-8">
-                        <Link 
+                        <component 
+                            :is="isStatic ? 'a' : Link"
                             :href="route('home')" 
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
@@ -24,8 +26,9 @@
                             ]"
                         >
                             Home
-                        </Link>
-                        <Link 
+                        </component>
+                        <component 
+                            :is="isStatic ? 'a' : Link"
                             :href="route('about')" 
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
@@ -35,8 +38,9 @@
                             ]"
                         >
                             About
-                        </Link>
-                        <Link 
+                        </component>
+                        <component 
+                            :is="isStatic ? 'a' : Link"
                             :href="route('projects')" 
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
@@ -46,8 +50,9 @@
                             ]"
                         >
                             Projects
-                        </Link>
-                        <Link 
+                        </component>
+                        <component 
+                            :is="isStatic ? 'a' : Link"
                             :href="route('contact')" 
                             :class="[
                                 'px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
@@ -57,7 +62,7 @@
                             ]"
                         >
                             Contact
-                        </Link>
+                        </component>
                     </div>
 
                     <!-- Mobile menu button -->
@@ -77,7 +82,8 @@
                 <!-- Mobile Navigation -->
                 <div v-show="mobileMenuOpen" class="md:hidden pb-4">
                     <div class="flex flex-col space-y-2">
-                        <Link 
+                        <component 
+                            :is="isStatic ? 'a' : Link"
                             :href="route('home')" 
                             @click="mobileMenuOpen = false"
                             :class="[
@@ -88,8 +94,9 @@
                             ]"
                         >
                             Home
-                        </Link>
-                        <Link 
+                        </component>
+                        <component 
+                            :is="isStatic ? 'a' : Link"
                             :href="route('about')" 
                             @click="mobileMenuOpen = false"
                             :class="[
@@ -100,8 +107,9 @@
                             ]"
                         >
                             About
-                        </Link>
-                        <Link 
+                        </component>
+                        <component 
+                            :is="isStatic ? 'a' : Link"
                             :href="route('projects')" 
                             @click="mobileMenuOpen = false"
                             :class="[
@@ -112,8 +120,9 @@
                             ]"
                         >
                             Projects
-                        </Link>
-                        <Link 
+                        </component>
+                        <component 
+                            :is="isStatic ? 'a' : Link"
                             :href="route('contact')" 
                             @click="mobileMenuOpen = false"
                             :class="[
@@ -124,7 +133,7 @@
                             ]"
                         >
                             Contact
-                        </Link>
+                        </component>
                     </div>
                 </div>
             </div>
@@ -176,25 +185,39 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import { route } from 'ziggy-js'
 
 const page = usePage()
 const mobileMenuOpen = ref(false)
+const isStatic = ref(false)
+
+// Check if we're in static mode
+onMounted(() => {
+    const appEl = document.getElementById('app')
+    isStatic.value = appEl && appEl.hasAttribute('data-page')
+})
 
 const isCurrentRoute = (routeName) => {
-    // Get the current page component name
-    const currentPage = page.component
-    
-    // Map route names to page components
-    const routeComponentMap = {
-        'home': 'Home',
-        'about': 'About', 
-        'projects': 'Projects',
-        'contact': 'Contact'
+    if (isStatic.value) {
+        // In static mode, check the current URL
+        const currentPath = window.location.pathname
+        const routePath = route(routeName)
+        return currentPath === routePath || (routePath === '/index.html' && currentPath === '/')
+    } else {
+        // Get the current page component name
+        const currentPage = page.component
+        
+        // Map route names to page components
+        const routeComponentMap = {
+            'home': 'Home',
+            'about': 'About', 
+            'projects': 'Projects',
+            'contact': 'Contact'
+        }
+        
+        return currentPage === routeComponentMap[routeName]
     }
-    
-    return currentPage === routeComponentMap[routeName]
 }
 </script> 
