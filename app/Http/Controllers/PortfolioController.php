@@ -149,8 +149,8 @@ class PortfolioController extends Controller
         return [
             'name' => 'Lorenzo Miguel D. Bela',
             'title' => 'Computer Engineering Student',
-            'email' => 'lorenzo.miguel.bela429@gmail.com',
-            'phone' => '+639656560409',
+            'email' => 'lorenzo.miguel.bela429@adamson.edu.ph',
+            'phone' => '+639666504091',
             'location' => '149-B Ilocos Sur, 1105, Quezon City',
             'objective' => 'Computer Engineering student seeking internship opportunities to apply technical skills in software development, hardware integration and system design while gaining valuable industry experience. Eager to contribute to innovative projects and learn from experienced professionals in a collaborative environment.',
             'linkedin' => null,
