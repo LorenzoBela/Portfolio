@@ -5,7 +5,6 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { ZiggyVue } from 'ziggy-js'
 import { Ziggy } from './ziggy'
-import { route as staticRoute } from './route-static'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Lorenzo Miguel D. Bela'
 
@@ -17,22 +16,20 @@ if (isStatic) {
     // Static mode - get data from HTML attribute  
     const pageData = JSON.parse(el.getAttribute('data-page').replace(/&quot;/g, '"'));
     
-    // Mock ziggy-js for static mode
-    window.route = staticRoute;
-    
-    // Also mock the module exports for import statements
-    if (!window.ziggyRoute) {
-        window.ziggyRoute = { route: staticRoute };
-    }
-    
-    resolvePageComponent(`./Pages/${pageData.component}.vue`, import.meta.glob('./Pages/**/*.vue'))
-        .then(page => {
-            const app = createApp({
-                render: () => h(page.default, pageData.props)
+    // Import static route helper for static mode
+    import('./route-static.js').then(({ route: staticRoute }) => {
+        // Mock ziggy-js for static mode
+        window.route = staticRoute;
+        
+        resolvePageComponent(`./Pages/${pageData.component}.vue`, import.meta.glob('./Pages/**/*.vue'))
+            .then(page => {
+                const app = createApp({
+                    render: () => h(page.default, pageData.props)
+                });
+                
+                app.mount(el);
             });
-            
-            app.mount(el);
-        });
+    });
 } else {
     // Laravel/Inertia mode (local development)
     createInertiaApp({
