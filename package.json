@@ -3,8 +3,9 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "vercel-build": "vite build",
+        "build": "vite build && npm run static-build",
+        "vercel-build": "vite build && npm run static-build",
+        "static-build": "node build-static.js",
         "dev": "vite dev"
     },
     "devDependencies": {
